@@ -1,0 +1,30 @@
+.leaderboard
+{
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.leaderboard th
+{
+  background : var(--menu_background);
+  padding: 6px 10px;
+}
+
+.leaderboard tr
+{
+  border-bottom: 1px solid var(--border);
+}
+
+.leaderboard tr:hover
+{
+  background: rgb(155, 155, 155);
+  cursor: default;
+}
+
+.leaderboard td
+{
+
+  padding: 6px 4px;
+}
