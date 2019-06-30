@@ -16,6 +16,20 @@
   margin: 0 auto;
   font-size: 22px;
   line-height: 48px;
+  text-decoration: none;
+}
+
+.nav-container a
+{
+  text-decoration: none;
+  color: var(--text);
+  
+}
+
+.nav-container a:hover
+{
+  background: var(--menu_item_hover);
+  cursor: pointer;
 }
 
 .nav-logo

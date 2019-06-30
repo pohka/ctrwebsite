@@ -1,19 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Navbar.css';
+import Router from "./Router"
 
-function Navbar() {
-  return (
-    <div className="Navbar">
-      <div class="nav-container">
-        <div class="nav-logo">Crash Team Racing</div>
-        <div class="nav-item">Time Trials</div>
-        <div class="nav-item">Speedruns</div>
-        <div class="nav-item">Archives</div>
-        <div class="nav-item">Log in</div>
-        <div class="nav-item">Register</div>
+class Navbar extends Component {
+
+
+  genItem(cls, routeID, text)
+  {
+    let route = null;
+    for(let i=0; i<Router.routes.length && route == null; i++)
+    {
+      if(Router.routes[i].id === routeID)
+      {
+        route = Router.routes[i];
+      }
+    }
+
+    if(route == null)
+    {
+      return null;
+    }
+
+    return (
+      <a href={route.dir} className={cls}onClick={Router.cc} route={route.id}>{text}</a>
+    );
+  }
+
+  render()
+  {
+    let itemDOMs = [];
+    for(let i=0; i<Navbar.items.length; i++)
+    {
+      let item = this.genItem(Navbar.items[i].cls, Navbar.items[i].route, Navbar.items[i].text);
+      if(item != null)
+      {
+        itemDOMs.push(item);
+      }
+    }
+
+    return (
+      <div className="Navbar">
+        <div className="nav-container">
+          {itemDOMs}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+Navbar.items = [];
 
 export default Navbar;

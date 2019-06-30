@@ -88,7 +88,7 @@ class Leaderboard extends Component {
   {
     const t = parseInt(time);
     //invalid time value
-    if(isNaN(t) || t==Number.MAX_SAFE_INTEGER)
+    if(isNaN(t) || t===Number.MAX_SAFE_INTEGER)
     {
       return "N/A";
     }
@@ -121,6 +121,7 @@ class Leaderboard extends Component {
       rows.push(
         <LeaderboardEntry
           entry={entry}
+          key={entry.id}
         />
       );
     });
@@ -128,7 +129,7 @@ class Leaderboard extends Component {
     return (
       <div>
         <h2>Crash Cove</h2>
-      <table class="leaderboard">
+      <table className="leaderboard">
         <thead>
           <tr>
             <th>Rank</th>
