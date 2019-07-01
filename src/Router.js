@@ -17,16 +17,43 @@ class Router
   }
 
   //set the route and returns true if route with id was found
-  static setRoute(id)
+  static setRoute(id, target)
   {
-    for(let i=0; i<Router.routes.length; i++)
+    if(id !== Router.route)
     {
-      if(Router.routes[i].id === id)
+      for(let i=0; i<Router.routes.length; i++)
       {
-        Router.routes[i].action();
-        Router.route = Router.routes[i].id;
-        window.history.pushState("", "title", Router.routes[i].dir);
-        return true;
+        if(Router.routes[i].id === id)
+        {
+          Router.routes[i].action(target);
+          Router.route = Router.routes[i].id;
+          
+          let path = Router.routes[i].dir;
+          let matches = path.match(/{.*?\}/g);
+          let missingKey = false;
+          if(matches != null)
+          {
+            for(let a=0; a<matches.length; a++)
+            {
+              let key = matches[a].substring(1,matches[a].length-1); //remove 2 brackets
+              let val = target.getAttribute(key);
+              if(val !== undefined && val != null)
+              {
+                path = path.replace(matches[a], val);
+              }
+              else
+              {
+                missingKey = true;
+              }
+            }
+          }
+          
+          if(missingKey === false)
+          {
+            window.history.pushState("", "title", path);
+            return true;
+          }
+        }
       }
     }
   }
@@ -44,10 +71,18 @@ class Router
     if(evt.button === 0)
     {
       evt.preventDefault();
-      let routeID = evt.target.getAttribute('route');
+      
+      let routeID = evt.target.getAttribute("route");
+      let target = evt.target;
+      if(routeID == null)
+      {
+        routeID = evt.target.parentNode.getAttribute("route");
+        target = evt.target.parentNode;
+      }
+      
       if(routeID !== undefined && routeID != null)
       {
-        Router.setRoute(routeID);
+        Router.setRoute(routeID, target);
       }
     }
   }

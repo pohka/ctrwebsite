@@ -1,0 +1,44 @@
+
+.track-container
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  padding-bottom: 300px;
+}
+
+.track
+{
+  box-sizing: border-box;
+  display: block;
+  min-width: 246px;
+  max-width: 246px;
+  color: var(--text);
+  text-decoration: none;
+  margin: 2px 2px;
+  background: var(--menu_background);
+  border-radius: 6px;
+}
+
+.track:hover
+{
+  background: var(--menu_item_hover);
+}
+
+.track img
+{
+  box-sizing: border-box;
+  width: 246px;
+  height: 198px;
+  padding: 12px 12px;
+  padding-bottom: 0px;
+
+}
+
+.track-name
+{
+  line-height: 20px;
+  text-align: center;
+  padding: 8px 0px ;
+}

@@ -19,6 +19,7 @@ body {
   padding-top: 48px;
   width: 1000px;
   margin: 0 auto;
+  overflow-y:scroll;
 }
 
 code {
