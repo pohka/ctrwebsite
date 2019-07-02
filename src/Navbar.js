@@ -22,8 +22,13 @@ class Navbar extends Component {
     }
 
     return (
-      <a href={route.dir} className={cls}onClick={Router.handleClick} route={route.id}>{text}</a>
+      <a href={route.dir} className={cls} onClick={Router.handleClick} route={route.id}>{text}</a>
     );
+  }
+
+  loginClick(evt)
+  {
+    //todo: open modal to sign in
   }
 
   render()
@@ -40,8 +45,11 @@ class Navbar extends Component {
 
     return (
       <div className="Navbar">
+        
         <div className="nav-container">
+          <a className="btn nav-logo" href="/" onClick={Router.handleClick} route="root">Crash Team Racing</a>
           {itemDOMs}
+          <div className="btn nav-item nav-login" onClick={this.loginClick}>Login</div>
         </div>
       </div>
     );

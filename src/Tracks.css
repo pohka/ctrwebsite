@@ -12,13 +12,13 @@
 {
   box-sizing: border-box;
   display: block;
-  min-width: 246px;
-  max-width: 246px;
+  min-width: 238px;
+  max-width: 238px;
   color: var(--text);
   text-decoration: none;
-  margin: 2px 2px;
+  margin: 6px 6px;
   background: var(--menu_background);
-  border-radius: 6px;
+  border: 1px solid var(--text);
 }
 
 .track:hover
@@ -29,16 +29,14 @@
 .track img
 {
   box-sizing: border-box;
-  width: 246px;
-  height: 198px;
-  padding: 12px 12px;
-  padding-bottom: 0px;
-
+  width:100%;
+  border-bottom: 1px solid var(--text);
+  margin: 0 0;
 }
 
 .track-name
 {
-  line-height: 20px;
+  height: 40px;
+  line-height: 36px;
   text-align: center;
-  padding: 8px 0px ;
 }

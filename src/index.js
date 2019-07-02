@@ -6,6 +6,7 @@ import Leaderboard from './Leaderboard';
 import Tracks from"./Tracks";
 import Archive from "./Archive";
 import Guide from "./Guide";
+import Speedrun from "./Speedrun"
 import './Router';
 import * as serviceWorker from './serviceWorker';
 import Router from './Router';
@@ -16,6 +17,16 @@ Router.routes.push({
   title : "Home",
   id : "root",
   dir : "/",
+  action : function(){
+
+    ReactDOM.render(<Tracks/>, document.getElementById('body'));
+  }
+});
+
+Router.routes.push({
+  title : "Tracks",
+  id : "tracks_root",
+  dir : "/tracks",
   action : function(){
 
     ReactDOM.render(<Tracks/>, document.getElementById('body'));
@@ -48,18 +59,32 @@ Router.routes.push({
   action : function(){
     ReactDOM.render(<Guide />, document.getElementById('body'));
   }
+});
+
+Router.routes.push({
+  title : "Speedrun",
+  id : "speedrun",
+  dir : "/speedrun",
+  action : function(){
+    ReactDOM.render(<Speedrun />, document.getElementById('body'));
+  }
 })
 
 Navbar.items = [
   {
-    cls : "btn nav-logo",
-    route : "root",
-    text : "Crash Team Racing"
+    cls : "btn nav-item",
+    route : "tracks_root",
+    text : "Tracks"
   },
   {
     cls : "btn nav-item",
     route : "archive",
     text : "Video Archive"
+  },
+  {
+    cls : "btn nav-item",
+    route : "speedrun",
+    text : "Speedruns"
   },
   {
     cls : "btn nav-item",
