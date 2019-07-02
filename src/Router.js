@@ -31,6 +31,12 @@ class Router
     return isMatch;
   }
 
+  static getParamsNow()
+  {
+    let route = Router.getRouteByID(Router.route);
+    return Router.getParamsFromPath(route.dir, window.location.pathname);
+  }
+
   //get a params object from the matching keys in dir
   static getParamsFromPath(routeDir, pathName)
   {

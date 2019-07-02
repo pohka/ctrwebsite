@@ -107,6 +107,18 @@ class Tracks extends Component
       <div className="track-container">{items}</div>
     );
   }
+
+  static getTrackNameByID(trackID)
+  {
+    for(let i=0; i<TRACKS_DATA.length; i++)
+    {
+      if(TRACKS_DATA[i].id === trackID)
+      {
+        return TRACKS_DATA[i].name;
+      }
+    }
+    return "";
+  }
 }
 
 export default Tracks;

@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import './Leaderboard.css';
+import "./Router";
+import Router from './Router';
+import Tracks from "./Tracks";
 
 class LeaderboardEntry extends Component {
+
   render() {
     const entry = this.props.entry;
 
     return (
-      <tr data-key={entry.id} >
+      <tr>
         <td>{entry.rank}</td>
-        <td>{entry.player}</td>
-        <td>{entry.country}</td>
+        <td>{entry.player_name}</td>
+        <td>{entry.country_code}</td>
         <td>{entry.IGTimeString}</td>
-        <td>{entry.driver}</td>
+        <td>{entry.driver_name}</td>
         <td>{entry.version}</td>
         <td>{entry.dateString}</td>
         <td>{entry.link}</td>
@@ -20,60 +24,70 @@ class LeaderboardEntry extends Component {
   }
 }
 
+
 class Leaderboard extends Component {
 
   constructor(props)
   {
     super(props);
+    this.entrys = [];
+    Leaderboard.current = this;
+    //var th = this;
 
-    this.props.entrys.forEach((entry) => {
-      //convert time from string to number
-      let time = parseInt(entry.time);
-      if(!isNaN(time))
-      {
-        entry.time = time;
+    let params = Router.getParamsNow();
+    this.trackName = Tracks.getTrackNameByID(params.trackID);
+    let url = "http://localhost:3001/query/course/" + params.trackID;
+    fetch(url, { })
+    .then(function(response){
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        return;
       }
       else
       {
-        entry.time = Number.MAX_SAFE_INTEGER;
+        return response.json();
       }
-
-      //generate in game time string (mm:ss:mmm)
-      entry.IGTimeString = Leaderboard.convertToIGTString(entry.time);
-
-      //generate date locale string
-      let epoch = parseInt(entry.date);
-      if(!isNaN(epoch))
+    }).then(function(res){
+      console.log(res.data);
+      for(let i=0; i<res.data.length; i++)
       {
-        let dt = new Date(epoch);
-        let month = (dt.getMonth() + 1);
-        if(month < 10)
-        {
-          month = "0" + month;
-        }
-        let day = dt.getDate();
-        if(day < 10)
-        {
-          day = "0" + day;
-        }
+        res.data[i].IGTimeString = Leaderboard.convertToIGTString(res.data[i].time);
+        res.data[i].dateString = Leaderboard.genDateString(res.data[i].date);
+        res.data[i].rank = i+1;
+      }
 
-        entry.dateString = dt.getFullYear() + "-" + month + "-" + day;
-      }
-      else
-      {
-        entry.dateString = "";
-      }
+      Leaderboard.current.entrys = res.data;
+
+      Leaderboard.current.forceUpdate();
     });
-
-    //sort by fastest time by default
-    Leaderboard.sortByKey(this.props.entrys, "time");
-    //set rank value
-    var count = 1;
-    this.props.entrys.forEach((entry) => {
-      entry.rank = count;
-      count++;
-    })
   }
+
+  //generate date locale string
+  static genDateString(timeStamp)
+  {
+    let dateString = "";
+    let epoch = parseInt(timeStamp);
+    if(!isNaN(epoch))
+    {
+      let dt = new Date(epoch);
+      let month = (dt.getMonth() + 1);
+      if(month < 10)
+      {
+        month = "0" + month;
+      }
+      let day = dt.getDate();
+      if(day < 10)
+      {
+        day = "0" + day;
+      }
+
+      dateString = dt.getFullYear() + "-" + month + "-" + day;
+    }
+
+    return dateString;
+  }
+
 
   //sort an array of objects by similar key
   static sortByKey(array, key) {
@@ -117,18 +131,18 @@ class Leaderboard extends Component {
   render() {
     const rows = [];
 
-    this.props.entrys.forEach((entry) => {
+    for(let i=0; i<this.entrys.length; i++)
+    {
       rows.push(
         <LeaderboardEntry
-          entry={entry}
-          key={entry.id}
+          entry={this.entrys[i]}
         />
       );
-    });
+    }
 
     return (
       <div>
-        <h2>Crash Cove</h2>
+        <h2>{this.trackName}</h2>
       <table className="leaderboard">
         <thead>
           <tr>
@@ -148,6 +162,8 @@ class Leaderboard extends Component {
     );
   }
 }
+
+Leaderboard.current = null;
 
 
 export default Leaderboard;
