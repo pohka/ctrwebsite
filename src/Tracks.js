@@ -82,14 +82,15 @@ class Tracks extends Component
   genItem(track)
   {
     let src = "/img/" + track.id + ".png";
+    let alt = track.name +" preview";
 
     const routeID = "track";
     let route = Router.getRouteByID(routeID);
     let path = Router.buildPathFromParams(route.dir, {trackID : track.id });
 
     return (
-    <a className="track" href={path} onClick={Router.handleClick} route={routeID}>
-      <img src={src} alt=""></img>
+    <a className="btn track" href={path} onClick={Router.handleClick} route={routeID}>
+      <img src={src} alt={alt} draggable="false"></img>
       <div className="track-name">{track.name}</div>
     </a>);
   }

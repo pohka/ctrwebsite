@@ -201,6 +201,6 @@ window.onpopstate = function(evt) {
 
 Router.route = "";
 Router.routes = [];
-Router.debugMode = false; //optional debugging
+Router.debugMode = false; //optional
 
 export default Router;
