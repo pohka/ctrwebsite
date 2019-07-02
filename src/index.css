@@ -43,3 +43,17 @@ code {
   user-drag: none;
   color: var(--text);
 }
+
+.video
+{
+  border: 0px;
+  width: 800px;
+  height : 450px;
+  margin: 0px auto;
+}
+
+.video iframe
+{
+  width: 100%;
+  height: 100%;
+}

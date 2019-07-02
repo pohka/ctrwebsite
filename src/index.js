@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Leaderboard from './Leaderboard';
 import Tracks from"./Tracks";
 import Archive from "./Archive";
+import Guide from "./Guide";
 import './Router';
 import * as serviceWorker from './serviceWorker';
 import Router from './Router';
@@ -35,20 +36,19 @@ var routeTrack = {
   id : "track",
   dir : "/track/{trackID}",
   action : function(params){
-    //console.log("trackID", params);
-
-    const ENTRYS = [
-      {id:"1", player:"john", country: "ie", time:"80000", driver:"coco", version: "NTSC-J", date:"1331761803979", link:""},
-      {id:"2", player:"bob", country: "fr", time:"104000", driver:"coco", version: "NTSC-J", date:"1561558803979", link:""},
-      {id:"3", player:"reallllllllly longnnnngnameeee", country: "au", time:"102000", driver:"coco", version: "NTSC-J", date:"1541561803979", link:""},
-      {id:"4", player:"jsir", country: "ie", time:"102000", driver:"coco", version: "NTSC-J", date:"1561551803979", link:""},
-      {id:"5", player:"pepe", country: "ie", time:"121600", driver:"dingodile", version: "PAL", date:"1561560803979", link:""},
-    ];
-
-    ReactDOM.render(<Leaderboard entrys={ENTRYS} />, document.getElementById('body'));
+    ReactDOM.render(<Leaderboard />, document.getElementById('body'));
   }
 };
 Router.routes.push(routeTrack);
+
+Router.routes.push({
+  title : "Guide",
+  id : "guide",
+  dir : "/guide",
+  action : function(){
+    ReactDOM.render(<Guide />, document.getElementById('body'));
+  }
+})
 
 Navbar.items = [
   {
@@ -59,7 +59,12 @@ Navbar.items = [
   {
     cls : "btn nav-item",
     route : "archive",
-    text : "Archive"
+    text : "Video Archive"
+  },
+  {
+    cls : "btn nav-item",
+    route : "guide",
+    text : "Guide"
   }
 ];
 ReactDOM.render(<Navbar />, document.getElementById('nav'));
