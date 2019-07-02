@@ -17,18 +17,17 @@ class Router
       return false;
     }
 
-    let isMatch = true;
-    for(let i=0; i<a.length && isMatch; i++)
+    let hasDiff = false;
+    for(let i=0; i<a.length && !hasDiff; i++)
     {
       //if string not a url param and they dont match
-      let match = a[i].match(/{.*?\}/g);
-      if(match == null && a[i] !== b[i])
+      if(!(a[i].length > 1 && a[i][0]===":") && a[i] !== b[i])
       {
-        isMatch = false;
+        hasDiff = true;
       }
     }
 
-    return isMatch;
+    return !hasDiff;
   }
 
   static getParamsNow()
@@ -55,10 +54,10 @@ class Router
     
     for(let i=0; i<a.length; i++)
     {
-      let match = a[i].match(/{.*?\}/g);
-      if(match!=null)
+      let isParam = (a.length > 1 && a[i][0] === ":");
+      if(isParam)
       {
-        let key = match[0].substring(1,match[0].length-1);
+        let key = a[i].substring(1);
         params[key] = b[i];
       }
     }
@@ -171,29 +170,35 @@ class Router
   static buildPathFromParams(dir, params)
   {
     let path = dir;
-    let matches = dir.match(/{.*?\}/g);
-    if(matches != null)
+    if(dir.indexOf(":") > -1)
     {
       if(params == null)
       {
-        console.log("params is null, when it requires match of keys:", matches);
+        console.log("params is null, when it requires match of keys");
         return null;
       }
 
-      for(let a=0; a<matches.length; a++)
+      let els = dir.split("/");
+      for(let i=0; i<els.length; i++)
       {
-        let key = matches[a].substring(1,matches[a].length-1);
-        if(params[key] !== undefined && params[key] != null)
+        if(els[i].length > 1 && els[i][0] === ":")
         {
-          path = path.replace(matches[a], params[key]);
-        }
-        else
-        {
-          console.log("param not found for key:", key);
-          return null;
+          let key = els[i].substring(1);
+          let val = params[key];
+
+          if(val !== undefined && val != null)
+          {
+            path = path.replace(":"+key, val);
+          }
+          else
+          {
+            console.log("param not found for key:", key);
+            return null;
+          }
         }
       }
     }
+
     return path;
   }
 }

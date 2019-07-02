@@ -45,7 +45,7 @@ Router.routes.push({
 var routeTrack = {
   title: "",
   id : "track",
-  dir : "/track/{trackID}",
+  dir : "/track/:trackID",
   action : function(params){
     ReactDOM.render(<Leaderboard />, document.getElementById('body'));
   }
