@@ -22,7 +22,7 @@ class Navbar extends Component {
     }
 
     return (
-      <a href={route.dir} className={cls}onClick={Router.cc} route={route.id}>{text}</a>
+      <a href={route.dir} className={cls}onClick={Router.handleClick} route={route.id}>{text}</a>
     );
   }
 

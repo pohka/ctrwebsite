@@ -34,9 +34,8 @@ var routeTrack = {
   title: "",
   id : "track",
   dir : "/track/{trackID}",
-  action : function(el){
-    let trackID = el.getAttribute("trackID");
-    console.log("trackID", trackID);
+  action : function(params){
+    //console.log("trackID", params);
 
     const ENTRYS = [
       {id:"1", player:"john", country: "ie", time:"80000", driver:"coco", version: "NTSC-J", date:"1331761803979", link:""},
