@@ -91,7 +91,7 @@ class Tracks extends Component
     return (
     <a className="btn track" href={path} onClick={Router.handleClick} route={routeID}>
       <div className="track-img-con">
-      <img src={src} alt={alt} draggable="false"></img>
+        <img src={src} alt={alt} draggable="false"></img>
       </div>
       <div className="track-name">{track.name}</div>
     </a>);

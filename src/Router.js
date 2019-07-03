@@ -82,7 +82,7 @@ class Router
         {
           console.log("Changing path:", pathName, "dir:", Router.routes[i].dir, "params:", params);
         }
-        
+
         if(Router.onPathChange != null)
         {
           Router.onPathChange();
@@ -138,10 +138,11 @@ class Router
       
       let routeID = evt.target.getAttribute("route");
       let target = evt.target;
-      if(routeID == null)
+
+      while(routeID == null)
       {
-        routeID = evt.target.parentNode.getAttribute("route");
-        target = evt.target.parentNode;
+        target = target.parentNode;
+        routeID = target.getAttribute("route");
       }
       
       if(routeID !== undefined && routeID != null)
