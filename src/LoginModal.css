@@ -1,0 +1,59 @@
+
+.login-modal
+{
+  position: fixed;
+  top: 70px;
+  background: var(--menu_background);
+  border: 2px solid var(--text);
+  left: 50%;
+  width: 800px;
+  height: 500px;
+  margin-left: -400px;
+}
+
+.login-menu
+{
+  width:100%;
+  display: flex;
+}
+
+
+
+.login-menu-item:first-child
+{
+  border-right: 2px solid var(--text);
+}
+
+.login-menu-item
+{
+  height: 44px;
+  width: 50%;
+  text-align: center;
+  line-height: 44px;
+  font-size: 20px;
+  border-bottom: 2px solid var(--text);
+  cursor: pointer;
+}
+
+.login-menu-item.active
+{
+  background: red;
+}
+
+.login-modal[data-hidden="true"]
+{
+  display:none;
+}
+
+
+.login-modal-bg
+{
+  position: fixed;
+  background: rgba(10,10, 10, 0.7);
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+

@@ -34,7 +34,7 @@ class VideoPreview extends Component
           <iframe src={videoSrc} 
             frameborder="0" 
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen="allowfullscreen"
+            allowFullScreen="allowfullscreen"
             mozallowfullscreen="mozallowfullscreen" 
             msallowfullscreen="msallowfullscreen" 
             oallowfullscreen="oallowfullscreen" 

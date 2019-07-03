@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Navbar.css';
-import Router from "./Router"
+import Router from "./Router";
+import Events from "./Events";
 
 class Navbar extends Component {
-
 
   genItem(cls, routeID, text)
   {
@@ -28,7 +28,7 @@ class Navbar extends Component {
 
   loginClick(evt)
   {
-    //todo: open modal to sign in
+    Events.setLoginIsHidden(false);
   }
 
   render()
@@ -47,7 +47,7 @@ class Navbar extends Component {
       <div className="Navbar">
         
         <div className="nav-container">
-          <a className="btn nav-logo" href="/" onClick={Router.handleClick} route="root">Crash Team Racing</a>
+          <a className="btn nav-logo" href="/" onClick={Router.handleClick} route="root">CTR WORLD</a>
           {itemDOMs}
           <div className="btn nav-item nav-login" onClick={this.loginClick}>Login</div>
         </div>

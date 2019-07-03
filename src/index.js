@@ -1,15 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
 import './index.css';
+
+//components
 import Navbar from './Navbar';
 import Leaderboard from './Leaderboard';
 import Tracks from"./Tracks";
 import Archive from "./Archive";
 import Guide from "./Guide";
 import Speedrun from "./Speedrun"
-import './Router';
+import LoginModal from './LoginModal';
+
+
+
 import * as serviceWorker from './serviceWorker';
 import Router from './Router';
+
+
 
 
 
@@ -92,6 +100,11 @@ Navbar.items = [
     text : "Guide"
   }
 ];
+
+
+
+ReactDOM.render(<LoginModal isHidden="true" />, document.getElementById("modal-container"));
+
 ReactDOM.render(<Navbar />, document.getElementById('nav'));
 
 
