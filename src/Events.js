@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import LoginModal from "./LoginModal";
 import Navbar from './Navbar';
 import Cookies from 'react-cookies'
+import Query from "./Query"
+import Store from "./Store"
 
 class Events
 {
@@ -34,6 +36,8 @@ class Events
 
       console.log(profile);
       const email = profile.U3;
+
+      Store.register.email = email;
     }
     else
     {

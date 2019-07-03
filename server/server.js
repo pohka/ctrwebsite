@@ -10,6 +10,21 @@ const app = express()
 
 app.use(cors())
 
+
+// const options = {
+//   hostname: hostname,
+//   port: port,
+//   path: '/todos',
+//   method: 'GET'
+// }
+// const req = http.request(options, res => {
+//   console.log(`statusCode: ${res.statusCode}`)
+
+//   res.on('data', d => {
+//     process.stdout.write(d)
+//   })
+// })
+
  
 //todo catach sql injection
 app.get('/query/:type/:trackKeyName', function (req, res) {
@@ -75,8 +90,14 @@ else
 });
   
 
+app.get('/setUser', function(req, res){
+  console.log("addUser");
+  res.end("{}");
+});
+
 
 var server = app.listen(port, function () {
   console.log("Example app listening at http://%s:%s", hostname, port)
 });
+
 
