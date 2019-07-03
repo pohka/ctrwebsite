@@ -10,7 +10,6 @@ class LeaderboardEntry extends Component {
     const entry = this.props.entry;
     if(entry === undefined)
     {
-      console.log("emptry row");
       return(
         <tr>
           <td></td>
@@ -75,7 +74,7 @@ class Leaderboard extends Component {
         return response.json();
       }
     }).then(function(res){
-      console.log(res.data);
+      console.log("request result:", res.data);
       for(let i=0; i<res.data.length; i++)
       {
         res.data[i].IGTimeString = Leaderboard.convertToIGTString(res.data[i].time);
@@ -159,9 +158,11 @@ class Leaderboard extends Component {
 
     for(let i=0; i<this.entrys.length; i++)
     {
+      let key = "row-" + i;
       rows.push(
         <LeaderboardEntry
           entry={this.entrys[i]}
+          key={key}
         />
       );
     }
@@ -170,7 +171,8 @@ class Leaderboard extends Component {
     const MIN_ROWS = 10;
     for(let i=this.entrys.length; i<MIN_ROWS; i++)
     {
-      rows.push(<LeaderboardEntry/>);
+      let key = "empty-row-" + i;
+      rows.push(<LeaderboardEntry key={key} />);
     }
 
     return (

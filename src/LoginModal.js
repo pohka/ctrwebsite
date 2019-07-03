@@ -31,7 +31,8 @@ class LoginModal extends Component {
     return(
     <div 
       className={cls}
-      onClick={func}>
+      onClick={func}
+      >
       {text}
     </div>
     );
@@ -42,13 +43,14 @@ class LoginModal extends Component {
 
     if(this.state.option === "login")
     {
-      content.push(<div>
+      content.push(<div key="google-btns">
         <GoogleLogin
           clientId="720355153565-m69ku08l8ec3lbs2p2al88jndqfvdbtp.apps.googleusercontent.com"
           buttonText="Login"
           onSuccess={Events.googleResponse}
           onFailure={Events.googleResponse}
           cookiePolicy={'single_host_origin'}
+          
         />
         
        
@@ -64,7 +66,7 @@ class LoginModal extends Component {
         <br></br>
         <label>Country</label>
         <select placeholder="-">
-          <option selected="selected" disabled="true">-</option>
+          <option disabled>-</option>
           <option value="fr">France</option>
           <option value="ie">Ireland</option>
         </select>
@@ -78,7 +80,7 @@ class LoginModal extends Component {
         <br></br>
         <label>Avatar</label>
         <select>
-          <option selected="selected" disabled="true">-</option>
+          <option disabled>-</option>
           <option value="crash">Crash</option>
           <option value="dingodile">Dingodile</option>
           <option value="coco">Coco</option>
@@ -104,7 +106,6 @@ class LoginModal extends Component {
     }
 
     return (
-      
       <div>
         
         <div className="login-modal" data-hidden={this.props.isHidden}>

@@ -139,10 +139,12 @@ class Router
       let routeID = evt.target.getAttribute("route");
       let target = evt.target;
 
-      while(routeID == null)
+      let maxLoops = 10;
+      while(routeID == null && maxLoops > 0)
       {
         target = target.parentNode;
         routeID = target.getAttribute("route");
+        maxLoops--;
       }
       
       if(routeID !== undefined && routeID != null)

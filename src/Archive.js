@@ -88,8 +88,9 @@ class Archive extends Component {
     let rows = [];
     for(let i=0; i<links.length; i++)
     {
+      let key = "link-" + i;
       rows.push(
-        <VideoPreview link={links[i]} />
+        <VideoPreview link={links[i]} key={key} />
       );
     }
 

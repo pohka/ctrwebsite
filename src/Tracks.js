@@ -89,7 +89,7 @@ class Tracks extends Component
     let path = Router.buildPathFromParams(route.dir, {trackID : track.id });
 
     return (
-    <a className="btn track" href={path} onClick={Router.handleClick} route={routeID}>
+    <a className="btn track" href={path} onClick={Router.handleClick} route={routeID} key={track.name}>
       <div className="track-img-con">
         <img src={src} alt={alt} draggable="false"></img>
       </div>
