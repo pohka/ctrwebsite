@@ -16,6 +16,11 @@ class Navbar extends Component {
       }
     }
 
+    if(Router.isMatchingPath(route.dir, window.location.pathname))
+    {
+      cls += " active";
+    }
+
     if(route == null)
     {
       return null;

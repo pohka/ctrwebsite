@@ -82,6 +82,11 @@ class Router
         {
           console.log("Changing path:", pathName, "dir:", Router.routes[i].dir, "params:", params);
         }
+        
+        if(Router.onPathChange != null)
+        {
+          Router.onPathChange();
+        }
       }
     }
 
@@ -112,6 +117,10 @@ class Router
               console.log("Changing path:", path, "dir:", Router.routes[i].dir, "params:", params);
             }
             window.history.pushState("", "title", path);
+            if(Router.onPathChange != null)
+            {
+              Router.onPathChange();
+            }
             return true;
           }
         }
@@ -213,5 +222,6 @@ window.onpopstate = function(evt) {
 Router.route = "";
 Router.routes = [];
 Router.debugMode = false; //optional
+Router.onPathChange = null; //event
 
 export default Router;

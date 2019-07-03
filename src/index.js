@@ -16,6 +16,7 @@ import LoginModal from './LoginModal';
 
 import * as serviceWorker from './serviceWorker';
 import Router from './Router';
+import Events from './Events';
 
 
 
@@ -101,7 +102,7 @@ Navbar.items = [
   }
 ];
 
-
+Router.onPathChange = Events.onRouteChange;
 
 ReactDOM.render(<LoginModal isHidden="true" />, document.getElementById("modal-container"));
 

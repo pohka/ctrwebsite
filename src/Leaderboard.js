@@ -8,6 +8,32 @@ class LeaderboardEntry extends Component {
 
   render() {
     const entry = this.props.entry;
+    if(entry === undefined)
+    {
+      console.log("emptry row");
+      return(
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      );
+    }
+
+    let linkData;
+    if(entry.link === undefined || entry.link == null || entry.link.length === 0)
+    {
+      linkData = "N/A";
+    }
+    else
+    {
+      linkData = (<a href={entry.link}>link</a>);
+    }
 
     return (
       <tr>
@@ -18,7 +44,7 @@ class LeaderboardEntry extends Component {
         <td>{entry.driver_name}</td>
         <td>{entry.version}</td>
         <td>{entry.dateString}</td>
-        <td>{entry.link}</td>
+        <td>{linkData}</td>
       </tr>
     );
   }
@@ -138,6 +164,13 @@ class Leaderboard extends Component {
           entry={this.entrys[i]}
         />
       );
+    }
+
+    //empty rows
+    const MIN_ROWS = 10;
+    for(let i=this.entrys.length; i<MIN_ROWS; i++)
+    {
+      rows.push(<LeaderboardEntry/>);
     }
 
     return (

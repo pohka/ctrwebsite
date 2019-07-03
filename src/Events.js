@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LoginModal from "./LoginModal";
+import Navbar from './Navbar';
 
 class Events
 {
@@ -17,6 +18,11 @@ class Events
   static signOut()
   {
     console.log("signed out");
+  }
+
+  static onRouteChange()
+  {
+    ReactDOM.render(<Navbar />, document.getElementById("nav"));
   }
 }
 

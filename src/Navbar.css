@@ -26,6 +26,7 @@
   cursor: pointer;
 }
 
+
 .nav-container a:hover, .nav-login:hover
 {
   background: var(--menu_item_hover);
@@ -41,6 +42,12 @@
   flex: 1;
   font-size: 18px;
 }
+
+.nav-item.active
+{
+  background: red !important;
+}
+
 
 .nav-login
 {

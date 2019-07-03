@@ -28,15 +28,23 @@
 
 .track img
 {
-  box-sizing: border-box;
   width:100%;
-  border-bottom: 1px solid var(--text);
-  margin: 0 0;
+  height: 100%;
 }
 
 .track-name
 {
   height: 40px;
-  line-height: 36px;
+  line-height: 40px;
   text-align: center;
+  
+}
+
+.track-img-con
+{
+  box-sizing: border-box;
+  width: 236px;
+  height: 197px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--text);
 }
