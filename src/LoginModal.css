@@ -7,7 +7,8 @@
   border: 2px solid var(--text);
   left: 50%;
   width: 800px;
-  height: 500px;
+  min-height: 200px;
+  padding-bottom: 64px;
   margin-left: -400px;
 }
 
@@ -16,8 +17,6 @@
   width:100%;
   display: flex;
 }
-
-
 
 .login-menu-item:first-child
 {
@@ -57,3 +56,102 @@
   z-index: -1;
 }
 
+#register-form
+{
+  width: 280px;
+  display: block;
+  margin: 0 auto;
+  padding: 34px 0px;
+  
+}
+
+.google-btn
+{
+  margin: 20px auto;
+  margin-top: 26px;
+  color:black;
+  width: 100%;
+  text-align: center;
+  background: rgb(238, 238, 238) !important;
+}
+
+.google-btn span
+{
+  margin-left: 10px;
+  font-size: 18px;
+}
+
+.google-btn div
+{
+  background: rgb(238, 238, 238) !important;
+}
+
+.google-invalid
+{
+  margin-top: -60px;
+}
+
+.submit
+{
+  width: 200px;
+  text-align: center;
+  padding: 6px 10px;
+  background: rgb(9, 118, 180);
+  cursor: pointer;
+  float: right;
+  margin-right: 40px;
+}
+
+.submit:hover
+{
+  background: rgb(2, 152, 240);
+  box-shadow: 0px 0px 4px rgb(196, 196, 196);
+  
+}
+
+label
+{
+  padding-right: 20px;
+  padding-bottom: 4px;
+  display: block;
+  margin-top: 14px;
+}
+
+select
+{
+  font-size: 16px;
+  padding: 6px 6px;
+  width:100%;
+  margin-right: 0px;
+}
+
+input
+{
+  border: none;
+  font-size: 18px;
+  padding: 8px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dob2
+{
+  width: 50px;
+  text-align: center;
+  margin: 0px 8px;
+}
+
+.dob4
+{
+  width: 80px;
+  text-align: center;
+  margin: 0px 8px;
+}
+
+.invalid-field
+{
+  position: absolute;
+  margin-left: 290px;
+  line-height: 30px;
+  color: rgb(255, 168, 168);
+}
