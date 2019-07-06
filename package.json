@@ -8,6 +8,7 @@
     "react": "^16.8.6",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.8.6",
+    "react-flags": "^0.1.18",
     "react-google-login": "^5.0.4",
     "react-scripts": "3.0.1",
     "sqlite3": "^4.0.9"

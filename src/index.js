@@ -88,7 +88,7 @@ Navbar.items = [
   {
     cls : "btn nav-item",
     route : "archive",
-    text : "Video Archive"
+    text : "Archive"
   },
   {
     cls : "btn nav-item",

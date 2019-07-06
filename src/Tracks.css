@@ -7,24 +7,26 @@
   flex-wrap: wrap;
   padding-top: 20px;
   padding-bottom: 300px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .track
 {
   box-sizing: border-box;
   display: block;
-  min-width: 238px;
-  max-width: 238px;
+  min-width: 288px;
+  max-width: 288px;
   text-decoration: none;
-  margin: 6px 6px;
+  margin: 12px 12px;
   background: var(--box_bg);
-  box-shadow: 0px 0px 8px var(--shadow);
+  box-shadow: 0px 2px 4px var(--shadow);
+  font-weight: 300;
 }
+
 
 .track:hover
 {
-  background: var(--primary);
-  color: var(--text_menu);
   transition: 120ms;
   transition-timing-function: ease-out;
 }
@@ -32,23 +34,57 @@
 .track img
 {
   width:100%;
-  
+  margin-top: -50px;
 }
+
 
 .track-name
 {
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
-  
+  position: relative;
+  transition: 100ms;
+  font-size: 16px;
+}
+
+.track-name::before
+{
+  position: absolute;
+  content: '';
+  width: 138px;
+  height: 4px;
+  border-radius: 10px;
+  margin-top: 46px;
+  margin-left: 75px;
+  display:block;
+  background: var(--primary);
+  z-index: 0;
+  opacity: 0;
+  transition: 100ms;
+}
+
+.track:hover .track-name
+{
+  margin-top: -2px;
+  transition: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+.track:hover .track-name::before
+{
+  opacity: 1;
+  margin-top: 40px;
+  transition: 200ms;
+  transition-timing-function: ease-in-out;
 }
 
 
 .track-img-con
 {
   box-sizing: border-box;
-  width: 238px;
-  height: 160px;
+  width: 288px;
+  height: 150px;
   overflow: hidden;
   border-bottom: 2px solid var(--primary);
 }

@@ -3,6 +3,7 @@ import './Leaderboard.css';
 import "./Router";
 import Router from './Router';
 import Tracks from "./Tracks";
+import Flag from "react-flags";
 
 class LeaderboardEntry extends Component {
 
@@ -34,11 +35,16 @@ class LeaderboardEntry extends Component {
       linkData = (<a href={entry.link}>link</a>);
     }
 
+    let flagSrc = "/img/flags/flags-iso/shiny/32/" + entry.country_code.toUpperCase() + ".png";
+
+
+
     return (
       <tr>
-        <td>{entry.rank}</td>
-        <td>{entry.player_name}</td>
-        <td>{entry.country_code}</td>
+        <td className="td-rank">#{entry.rank}</td>
+        <td className="td-country"><img src={flagSrc}></img></td>
+        <td className="td-player">{entry.player_name}</td>
+        
         <td>{entry.IGTimeString}</td>
         <td>{entry.driver_name}</td>
         <td>{entry.version}</td>
@@ -176,14 +182,14 @@ class Leaderboard extends Component {
     }
 
     return (
-      <div>
+      <div className="leaderboard-container">
         <h2>{this.trackName}</h2>
       <table className="leaderboard">
         <thead>
           <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th>Country</th>
+            <th className="td-rank"></th>
+            <th className="td-country"></th>
+            <th className="td-player"></th>
             <th>Time</th>
             <th>Driver</th>
             <th>Version</th>

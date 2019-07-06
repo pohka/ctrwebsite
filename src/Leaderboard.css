@@ -1,12 +1,20 @@
+.leaderboard-container
+{
+  padding: 30px 40px;
+}
+
 .leaderboard
 {
+  box-sizing: border-box;
   width: 100%;
   text-align: center;
-  margin-top: 20px;
-  border-collapse: collapse;
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
+  border-collapse: separate;
+  border-spacing: 0px 3px;
+  padding: 0px 30px;
+  font-size: 14px;
 }
+
+
 
 .leaderboard th
 {
@@ -17,26 +25,49 @@
 
 .leaderboard tr
 {
+  background: var(--row);
   height: 34px;
-  border-bottom: 1px solid var(--border);
+  
+  
+  border-radius: 20px;
+  
+
 }
 
-.leaderboard tr:nth-child(even)
-{
-  background: var(--alt_row);
+tr.spaceUnder>td {
+  padding-bottom: 2em;
 }
 
 .leaderboard tr:hover
 {
-  background: var(--logo);
-  color: white;
+  background: var(--row_hover);
   cursor: default;
 }
 
 .leaderboard td
 {
+  
   line-height: 34px;
   padding: 0px 4px;
 }
 
+.td-player
+{
+  width: 200px;
+  text-align:left;
+  padding-left: 10px;
+}
+
+.td-country
+{
+  width: 30px;
+}
+
+.td-country img{
+  position: absolute;
+  margin-top: -14px;
+  margin-left: -14px;
+  height: 28px;
+  width: 28px;
+}
 
