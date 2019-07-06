@@ -4,11 +4,14 @@
   text-align: center;
   margin-top: 20px;
   border-collapse: collapse;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
 }
 
 .leaderboard th
 {
   background : var(--menu_background);
+  color: var(--text_menu);
   padding: 6px 10px;
 }
 
@@ -18,9 +21,15 @@
   border-bottom: 1px solid var(--border);
 }
 
+.leaderboard tr:nth-child(even)
+{
+  background: var(--alt_row);
+}
+
 .leaderboard tr:hover
 {
-  background: rgb(155, 155, 155);
+  background: var(--logo);
+  color: white;
   cursor: default;
 }
 

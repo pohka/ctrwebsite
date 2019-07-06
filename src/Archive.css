@@ -6,7 +6,6 @@
   flex-wrap: wrap;
   padding-top: 20px;
   padding-bottom: 300px;
-  
 }
 
 .video-preview
@@ -14,7 +13,8 @@
   box-sizing: border-box;
   padding: 0px 0px;
   width: 100%;
-  background: var(--menu_background);
+  background: var(--box_bg);
+  box-shadow: 0px 6px 16px var(--shadow);
   margin-bottom: 10px;
   display: flex;
 }

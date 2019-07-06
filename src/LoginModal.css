@@ -3,13 +3,16 @@
 {
   position: fixed;
   top: 70px;
-  background: var(--menu_background);
-  border: 2px solid var(--text);
+  background: var(--background);
+  border: 0px solid var(--border);
   left: 50%;
   width: 800px;
   min-height: 200px;
   padding-bottom: 64px;
   margin-left: -400px;
+  z-index: 20;
+  transition-duration: 300ms;
+  animation-timing-function: ease-in;
 }
 
 .login-menu
@@ -20,29 +23,50 @@
 
 .login-menu-item:first-child
 {
-  border-right: 2px solid var(--text);
+  border-right: 0px solid var(--border);
 }
 
 .login-menu-item
 {
-  height: 44px;
+  background: rgba(196, 196, 196, 0.4);
+  height: 50px;
   width: 50%;
   text-align: center;
-  line-height: 44px;
+  line-height: 50px;
   font-size: 20px;
-  border-bottom: 2px solid var(--text);
+  border-bottom: 0px solid var(--border);
   cursor: pointer;
+  color: var(--text);
 }
+
 
 .login-menu-item.active
 {
-  background: red;
+  background: var(--primary);
+  color: var(--text_menu);
 }
 
-.login-modal[data-hidden="true"]
+.login-menu-item.active:last-child
 {
-  display:none;
+  border-left: 2px solid rgba(58, 58, 58, 0.692);
+  box-shadow: -4px 0px 4px rgb(99, 99, 99);
 }
+
+.login-menu-item.active:first-child
+{
+  border-right: 2px solid rgba(58,58,58, 0.692);
+  box-shadow: 4px 0px 4px rgb(99, 99, 99);
+}
+
+.login-modal[data-hidden="true"], .login-modal-bg[data-hidden="true"]
+{
+  visibility: hidden;
+  opacity: 0;
+  transition-duration: 300ms;
+  animation-timing-function: ease-in;
+}
+
+
 
 
 .login-modal-bg
@@ -53,8 +77,17 @@
   height: 100%;
   top: 0px;
   left: 0px;
-  z-index: -1;
+  z-index: 1;
+  
 }
+
+
+.login-modal, .login-modal-bg
+{
+  transition-duration: 300ms;
+  animation-timing-function: ease-in;
+}
+
 
 #register-form
 {
@@ -72,7 +105,7 @@
   color:black;
   width: 100%;
   text-align: center;
-  background: rgb(238, 238, 238) !important;
+  background: rgb(255, 255, 255) !important;
 }
 
 .google-btn span
@@ -95,23 +128,26 @@
 {
   width: 200px;
   text-align: center;
-  padding: 6px 10px;
-  background: rgb(9, 118, 180);
+  padding: 12px 10px;
+  background: rgba(2, 153, 240, 0.8);
+  color : var(--text_menu);
   cursor: pointer;
   float: right;
+  font-size: 20px;
   margin-right: 40px;
 }
 
 .submit:hover
 {
   background: rgb(2, 152, 240);
-  box-shadow: 0px 0px 4px rgb(196, 196, 196);
+  box-shadow: 0px 2px 4px rgb(138, 138, 138, 0.8);
   
 }
 
 label
 {
   padding-right: 20px;
+  padding-left: 4px;
   padding-bottom: 4px;
   display: block;
   margin-top: 14px;
@@ -119,10 +155,11 @@ label
 
 select
 {
-  font-size: 16px;
-  padding: 6px 6px;
+  font-size: 18px;
+  padding: 8px 10px;
   width:100%;
   margin-right: 0px;
+  border: none;
 }
 
 input
@@ -132,6 +169,16 @@ input
   padding: 8px 10px;
   width: 100%;
   box-sizing: border-box;
+}
+
+input:focus, select:focus
+{
+  box-shadow: 0px 2px 12px rgb(138, 138, 138);
+}
+
+.dob2:first-child
+{
+  margin-left: 0px;
 }
 
 .dob2
@@ -153,5 +200,5 @@ input
   position: absolute;
   margin-left: 290px;
   line-height: 30px;
-  color: rgb(255, 168, 168);
+  color: var(--error);
 }

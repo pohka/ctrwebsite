@@ -22,7 +22,7 @@
 .nav-container a
 {
   text-decoration: none;
-  color: var(--text);
+  color: var(--text_menu);
   cursor: pointer;
 }
 
@@ -35,6 +35,8 @@
 .nav-logo
 {
   flex: 2;
+  color: var(--logo) !important;
+  font-weight: bold;
 }
 
 .nav-item
@@ -45,12 +47,14 @@
 
 .nav-item.active
 {
-  background: red !important;
+  background: var(--primary) !important;
+  transition: 150ms;
+  transition-timing-function: ease-out;
 }
 
 
 .nav-login
 {
   cursor: pointer;
-
+  color: var(--text_menu);
 }

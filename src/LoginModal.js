@@ -170,7 +170,7 @@ class LoginModal extends Component {
     validation.google = false;
     if(loginToken === undefined || Store.register.email.length <= 0)
     {
-      this.errors.google = "account not link";
+      this.errors.google = "account not linked";
     }
     else if(Store.register.email.match(/\S+@\S+\.\S+/) === null)
     {
@@ -441,16 +441,18 @@ class LoginModal extends Component {
       content.push(this.genRegisterForm());
     }
 
+
     return (
       <div>
-        
+        <div className="login-modal-bg" key="login-bg" onClick={(e)=>{Events.setLoginIsHidden(true)}} data-hidden={this.props.isHidden}></div>
         <div className="login-modal" data-hidden={this.props.isHidden}>
+            
             <div className="login-menu">
               {this.genMenuItem("login", "Login")}
               {this.genMenuItem("register", "Register")}
             </div>
             <div className="login-content">{content}</div>
-          <div className="login-modal-bg" onClick={(e)=>{Events.setLoginIsHidden(true)}}></div>
+          
         </div>
       </div>
     );

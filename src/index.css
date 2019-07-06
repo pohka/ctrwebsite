@@ -1,10 +1,17 @@
 :root
 {
-  --text: rgb(240,240,240);
-  --background: rgb(66, 66, 66);
-  --menu_background: rgb(37, 37, 37);
-  --menu_item_hover: rgb(82, 82, 82);
+  --text: rgb(0, 0, 0);
+  --background: rgb(240, 240, 240);
+  --menu_background: rgb(58, 58, 58);
+  --menu_item_hover: rgb(94, 94, 94);
   --border: rgb(139, 139, 139);
+  --text_menu : rgb(248, 248, 248);
+  --primary : rgb(245, 78, 1);
+  --logo: rgb(255, 94, 0);
+  --box_bg: rgb(228, 228, 228);
+  --shadow: rgb(36, 36, 36);
+  --error: rgb(245, 0, 0);
+  --alt_row : rgb(231, 231, 231);
 }
 
 body {
