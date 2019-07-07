@@ -27,7 +27,7 @@ class Navbar extends Component {
     }
 
     return (
-      <a href={route.dir} className={cls} onClick={Router.handleClick} route={route.id} key={text}>{text}</a>
+      <a href={route.dir} className={cls} onClick={Router.handleClick} route={route.id} key={text}>{text.toUpperCase()}</a>
     );
   }
 
@@ -54,7 +54,7 @@ class Navbar extends Component {
         <div className="nav-container">
           <a className="btn nav-logo" href="/" onClick={Router.handleClick} route="root">CTR WORLD</a>
           {itemDOMs}
-          <div className="btn nav-item nav-login" onClick={this.loginClick}>Login</div>
+          <div className="btn nav-item nav-login" onClick={this.loginClick}>LOGIN</div>
         </div>
       </div>
     );

@@ -93,7 +93,7 @@ class Tracks extends Component
       <div className="track-img-con">
         <img src={src} alt={alt} draggable="false"></img>
       </div>
-      <div className="track-name">{track.name}</div>
+      <div className="track-name">{track.name.toUpperCase()}</div>
     </a>);
   }
 

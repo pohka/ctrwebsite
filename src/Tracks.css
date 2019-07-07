@@ -19,9 +19,11 @@
   max-width: 288px;
   text-decoration: none;
   margin: 12px 12px;
-  background: var(--box_bg);
+  letter-spacing: 1.4px;
+  background: var(--menu_background);
   box-shadow: 0px 2px 4px var(--shadow);
   font-weight: 300;
+  font-family: var(--font-heading);
 }
 
 

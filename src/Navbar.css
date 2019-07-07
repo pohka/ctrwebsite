@@ -8,6 +8,7 @@
   width: 100%;
   z-index: 100;
   box-shadow: 0px 4px 8px var(--shadow);
+  font-family: var(--font-heading);
 }
 
 
@@ -17,12 +18,15 @@
   width: 1000px;
   margin: 0 auto;
   font-size: 18px;
+  
   line-height: 52px;
+  letter-spacing: 1.4px;
   text-decoration: none;
 }
 
 .nav-container a
 {
+  padding-top: 2px;
   text-decoration: none;
   color: var(--text_menu);
   cursor: pointer;
@@ -57,6 +61,8 @@
 
 .nav-login
 {
+  padding-top: 2px;
+  letter-spacing: 1.4px;
   cursor: pointer;
   color: var(--text_menu);
 }
