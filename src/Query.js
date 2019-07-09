@@ -3,17 +3,26 @@ class Query
 {
   static create(path, params)
   {
-    let fullpath = "http://" + Query.host + path;
-    if(!Query.isParamsEmpty(params))
+    let fullPath = "http://" + Query.host + path;
+
+    //if params is not empty
+    if(!(Object.keys(params).length === 0 && params.constructor === Object))
     {
-      fullpath += "?";
+      fullPath += "?";
+      let i=0;
       for(let key in params)
       {
-        fullpath += key + "=" + params[key] + "&";
+        if(i>0)
+        {
+          fullPath += "&"
+        }
+        i++;
+
+        fullPath += key + "=" + params[key];
       }
-      fullpath.slice(0, -1); //remove last ampersand
+
+      return encodeURI(fullPath);
     }
-    return fullpath;
   }
 
   static isParamsEmpty(params) 

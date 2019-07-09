@@ -4,6 +4,7 @@ import GoogleLogin from 'react-google-login';
 import Events from './Events';
 import Store from "./Store";
 import Cookies from 'react-cookies'
+import Query from "./Query";
 
 class LoginModal extends Component {
   constructor(props)
@@ -65,28 +66,6 @@ class LoginModal extends Component {
 
   handleRegister(evt, comp)
   {
-    // //send msg to server
-    // const url = Query.create("/addUser", { token : tokenID })
-    // fetch(url, { })
-    // .then(function(res){
-    //   if (res.status !== 200) {
-    //     console.log('Looks like there was a problem. Status Code: ' +
-    //       res.status);
-    //     return;
-    //   }
-    //   else
-    //   {
-    //     return res.json();
-    //   }
-    // }).then(function(res){
-    //   console.log("response:", res);
-    // });
-
-    //let form = document.getElementById("register-form");
-
-    //let params = Store.register;
-
-
     //validate client side before sending to server
     //--------------------------------------------------
     let validation = {};
@@ -139,7 +118,7 @@ class LoginModal extends Component {
     }
     else if(Store.register.year <= oldestYear)
     {
-      this.errors.dob = "too old";
+      this.errors.dob = "invalid date";
     }
     else if(Store.register.month <= 0 || Store.register.month > 12 || Store.register.day > 31 || Store.register.day <=0)
     {
@@ -207,12 +186,47 @@ class LoginModal extends Component {
     }
     
 
-    var params = Store.register;
-    params.token = loginToken;
+    const dobDate = new Date(
+      Store.register.year + " " +
+      Store.register.month + " " +
+      Store.register.day + " 00:00:00 UTC"
+    );
+
+    var params = {
+      avatar : Store.register.avatar,
+      country : Store.register.country,
+      email : Store.register.email,
+      dob : dobDate.getTime(),
+      token : loginToken,
+      username : Store.register.username
+    };
+
+    //params = Store.register;
+    //params.token = loginToken;
     console.log("params", params);
     if(isAllValid)
     {
+     // const url = Url.create("/adduser", params);
+      
+      
       //send to server
+      //validated on server side too
+      const url = Query.create("/addUser", params);
+      console.log("url:", url);
+      fetch(url, { })
+      .then(function(res){
+        if (res.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +
+            res.status);
+          return;
+        }
+        else
+        {
+          return res.json();
+        }
+      }).then(function(res){
+        console.log("response:", res);
+      });
       //validate server side too
       //wait for response and check if there was error or username is already taken
     }
