@@ -2,8 +2,39 @@ import React, { Component } from 'react';
 import './Navbar.css';
 import Router from "./Router";
 import Events from "./Events";
+import Cookies  from 'react-cookies';
 
 class Navbar extends Component {
+  constructor(props)
+  {
+    super(props);
+
+    const token = Cookies.load("login-token");
+    const isSignedIn = (token !== undefined);
+    if(isSignedIn)
+    {
+      let username = Cookies.load("username");
+      if(username === undefined)
+      {
+        username = "Profile";
+      }
+      
+      let avatar = Cookies.load("avatar");
+      if(avatar === undefined)
+      {
+        avatar = "crash";
+      }
+
+      this.username = username;
+      this.avatar = avatar;
+    }
+    console.log("username:", );
+    console.log("avatar:", Cookies.load("avatar"));
+    this.isSignedIn = isSignedIn;
+
+
+    this.setState({ signedIn : isSignedIn });
+  }
 
   genItem(cls, routeID, text)
   {
@@ -36,8 +67,21 @@ class Navbar extends Component {
     Events.setLoginIsHidden(false);
   }
 
+  accountNavItem()
+  {
+    if(this.isSignedIn === true)
+    {
+      return(<div className="btn nav-item nav-login">{this.username}</div>);
+    }
+    else
+    {
+      return (<div className="btn nav-item nav-login" onClick={this.loginClick}>LOGIN</div>);
+    }
+  }
+
   render()
   {
+    
     let itemDOMs = [];
     for(let i=0; i<Navbar.items.length; i++)
     {
@@ -48,13 +92,15 @@ class Navbar extends Component {
       }
     }
 
+    let account = this.accountNavItem();
+    itemDOMs.push(account);
+
     return (
       <div className="Navbar">
         
         <div className="nav-container">
           <a className="btn nav-logo" href="/" onClick={Router.handleClick} route="root">CTR WORLD</a>
           {itemDOMs}
-          <div className="btn nav-item nav-login" onClick={this.loginClick}>LOGIN</div>
         </div>
       </div>
     );

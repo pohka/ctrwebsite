@@ -165,13 +165,67 @@ function validateEmail(email)
   return isValid;
 }
 
+//adds user to database, no validation 
+function addUser(params, callback)
+{
+  var db = new sqlite3.Database('ctr.db');
+  const userQuery = 
+    "INSERT INTO players (name, country_code, dob, email) " +
+    "VALUES ('" + params.username + "', '" + params.country + "', " + params.dob + ", '" + params.email + "')";
+
+  db.run(userQuery, [], (err) => {
+    if(err)
+    {
+      callback(false);
+      db.close();
+    }
+    else
+    {
+      console.log("Added new user: ", params.username);
+      db.all("SELECT * FROM players WHERE name='" + params.username + "'", [], (err, rows) =>{
+        if(err)
+        {
+          callback(false);
+          db.close();
+        }
+        if(rows.length > 0)
+        {
+          const MS_IN_DAY = 86400000;
+          const playerID = rows[0].id;
+          let expireDate = new Date(Date.now() + (14 * MS_IN_DAY));
+
+          const tokenQuery = "INSERT INTO tokens (token, player_id, expires) " +
+            "VALUES ('" + params.token + "', " + playerID + ", " + expireDate.getTime() +")";
+
+          db.run(tokenQuery, [], (err) => {
+            if(err)
+            {
+              console.log("token error");
+              callback(false);
+            }
+            else
+            {
+              callback(true);
+            }
+            
+            db.close();
+          });
+
+        }
+      });
+    }
+  });
+
+ 
+}
+
 app.get('/addUser', function(req, res){
   //console.log("addUser", req.originalUrl);
   //req.originalUrl; //url
   let params = getUrlParams(req.originalUrl);
   //console.log("params:", params);
 
-  let result = {};
+  var result = {};
 
 
   //validate server side too
@@ -218,6 +272,7 @@ app.get('/addUser', function(req, res){
     {
       //check if username is already in use
       var db = new sqlite3.Database('ctr.db');
+      console.log("query: find matching username");
       const query = "SELECT * FROM players WHERE name='"+params.username+"'";
       db.all(query, [], (err, rows) => {
         if(err)
@@ -248,27 +303,63 @@ app.get('/addUser', function(req, res){
             else
             {
               //TODO: check if email is already in use
-              //SELECT * FROM players WHERE email='params.email'
-              //validate other params
-              const isValid = validateAddUserOtherParams(params);
-              if(!isValid)
-              {
-                result.error = "invalid parameter(s)";
-                result.errorID = 0;
-                res.end(JSON.stringify(result));
-              }
-              if(isValid)
-              {
-                //TODO:
-                //add new player to database
-                //add token to database
-                result.success = "success";
-                res.end(JSON.stringify(result));
-              }
+              console.log("query: find matching email");
+              const emailQuery = "SELECT * FROM players WHERE email='" + params.email + "'";
+              db.all(emailQuery, [], (err, rows) => {
+                //validate other params
+                if(err)
+                {
+                  result.error = "database error 1";
+                  result.errorID = 0;
+                  res.end(JSON.stringify(result));
+                }
+                else
+                {
+                  //email already in use
+                  if(rows.length > 0)
+                  {
+                    result.error = "email already in use";
+                    result.errorID = 3;
+                    res.end(JSON.stringify(result));
+                  }
+                  else
+                  {
+                    const isValid = validateAddUserOtherParams(params);
+                    if(!isValid)
+                    {
+                      result.error = "invalid parameter(s)";
+                      result.errorID = 0;
+                      res.end(JSON.stringify(result));
+                    }
+                    if(isValid)
+                    {
+
+                      addUser(params, (isSuccess)=>{
+                        if(isSuccess)
+                        {
+                          result.success = isSuccess;
+                        }
+                        else
+                        {
+                          result.error = "database error 2";
+                          result.errorID = 4;
+                        }
+                        res.end(JSON.stringify(result));
+                      });
+                      //TODO:
+                      //add new player to database
+                      //add token to database
+                      
+                    }
+                  }
+                }
+              });
             }
           }
         }
+        
         db.close();
+        console.log("DB CLOSED");
       });
     }
   }

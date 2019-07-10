@@ -201,14 +201,10 @@ class LoginModal extends Component {
       username : Store.register.username
     };
 
-    //params = Store.register;
-    //params.token = loginToken;
+
     console.log("params", params);
     if(isAllValid)
     {
-     // const url = Url.create("/adduser", params);
-      
-      
       //send to server
       //validated on server side too
       const url = Query.create("/addUser", params);
@@ -226,6 +222,40 @@ class LoginModal extends Component {
         }
       }).then(function(res){
         console.log("response:", res);
+
+        if(res.error)
+        {
+          //todo: handle errors on client side
+        }
+        else if(res.success !== undefined && res.success === true)
+        {
+          //add cookies
+          const MS_IN_DAY = 86400000;
+          let expireDate = new Date(Date.now() + (14*MS_IN_DAY));
+          Cookies.save(
+            "avatar", 
+            params.avatar,
+            {
+              path: '/',
+              expires : expireDate
+            }
+          );
+          Cookies.save(
+            "username", 
+            params.username,
+            {
+              path: '/',
+              expires : expireDate
+            }
+          );
+
+          //hide modal
+          Events.setLoginIsHidden(true);
+          
+
+          //todo: send out global event
+          //which will update navbar
+        }
       });
       //validate server side too
       //wait for response and check if there was error or username is already taken

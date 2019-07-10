@@ -104,7 +104,7 @@ Navbar.items = [
 
 Router.onPathChange = Events.onRouteChange;
 
-ReactDOM.render(<LoginModal isHidden="false" />, document.getElementById("modal-container"));
+ReactDOM.render(<LoginModal isHidden="true" />, document.getElementById("modal-container"));
 
 ReactDOM.render(<Navbar />, document.getElementById('nav'));
 
