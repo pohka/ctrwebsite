@@ -2,13 +2,21 @@ const http = require('http');
 const hostname = 'localhost';
 const port = 3001;
 var sqlite3 = require('sqlite3').verbose();
+const DATABASE_PATH = 'ctr.db';
+const debug = require("./debug.js");
+debug.setIsEnabled(true);
 
 
 const express = require('express')
 var cors = require('cors')
 const app = express()
 
+
 app.use(cors())
+
+
+require('./addUser').init(app);
+
 
 //let v = "http://localhost:3001/addUser?avatar=coco&country=fr&email=pohka10@gmail.com&dob=765331200000&token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjZlNTUwOGQyNzk2NWFkNzkwN2MyMzIyMTJkZWZhNDhlZDc2MzcyN2UiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNzIwMzU1MTUzNTY1LW02OWt1MDhsOGVjM2xiczJwMmFsODhqbmRxZnZkYnRwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNzIwMzU1MTUzNTY1LW02OWt1MDhsOGVjM2xiczJwMmFsODhqbmRxZnZkYnRwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTA3MzI1MTE4NjYyNDU0NDM3MjkxIiwiZW1haWwiOiJwb2hrYTEwQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoibFJrTW54Y0pRN2w5ZjhKRFNaN2VwQSIsIm5hbWUiOiJQb2hrYSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQUF1RTdtQWhUU1NtY2ItNHlIbWtLVDRZMnV0VkpaOU1tbG8wM2JaZFBBMWdxUT1zOTYtYyIsImdpdmVuX25hbWUiOiJQb2hrYSIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTYyNzA3NjUyLCJleHAiOjE1NjI3MTEyNTIsImp0aSI6ImU4YWJmZDkwZWUwYzM0Y2FlMjRhMWFhOWI5MWQyYTI5Mjg2MTJmMzcifQ.toXBl4kwWA9Z4awdD2N9qLxjkLJ_fVKfvI4imnzvSpt7fcLblpo1w5rTwCgOy056XFILY4lY3DPhJLSq1e0fFl2tJZ7nc50-Ou5XZg4ANHIgQbtG5cOXxq8gbilyGDOViR9cT4SgjOO99JAv5RRRzpb-M1bSYrLYaQ4LGmF1JCpOSdYLeIVcu51zF2Q5PZ3n0vY_kOYKsclEZcQzdWRnlNMdf3zSIrRe1sGH04WyBU_U_QaxKGvaTOEfF2TEcqGLGB3T1YEaGkink85rpBeRRNCALIQ-svXJ1jN8RnBPh96jK-e28uD1XY42-1bRou58FOBWRWmj3XlEL8hRRb51ow&username=pohka"
 
@@ -218,6 +226,81 @@ function addUser(params, callback)
 
  
 }
+
+
+
+function isEmailUnique(email) {
+  var isUnique = true;
+  var db = new sqlite3.Database(DATABASE_PATH);
+  db.all("SELECT * FROM players WHERE email='"+email+"'", [], (err, rows) => {
+    //validate other params
+    if(err || rows.length > 0)
+    {
+      isUnique = false;
+    }
+    db.close();
+    return isUnique;
+  });
+}
+
+app.get("/test", function(req, res){
+  let result = {};
+
+  let email = "abc";
+
+  var isUniqueEmail = new Promise(function (resolve, reject) {
+    var db = new sqlite3.Database(DATABASE_PATH);
+    db.all("SELECT * FROM players WHERE email='"+email+"'", [], (err, rows) => {
+      //validate other params
+      if(err)
+      {
+        result.error = "database error";
+        console.log(err);
+        throw err;
+      }
+      else
+      {
+        result.isUnique = (rows.length <= 0);
+      }
+      db.close();
+      resolve(result);
+    });
+  });
+
+
+  isUniqueEmail.then(function(result, err){
+    //continue from here
+    if(result.error)
+    {
+
+    }
+    else
+    {
+      if(result.isUnique === false)
+      {
+        //not unique email
+      }
+      else
+      {
+        //continue
+        // addUser(params, (isSuccess)=>{
+        //   if(isSuccess)
+        //   {
+        //     result.success = isSuccess;
+        //   }
+        //   else
+        //   {
+        //     result.error = "database error 2";
+        //     result.errorID = 4;
+        //   }
+        //   res.end(JSON.stringify(result));
+        // });
+      }
+    }
+
+    res.end(JSON.stringify(result));
+  });
+});
 
 app.get('/addUser', function(req, res){
   //console.log("addUser", req.originalUrl);
