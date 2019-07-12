@@ -1,7 +1,6 @@
-* tidy up sign in code on backend
+* login, with existing account
+* verify token with google on backend https://developers.google.com/identity/sign-in/web/backend-auth
 * country codes in drop down
-* login
-* sign out
 * submit entries for leaderboard
 * leaderboard sub menu, select (course, lap, Starting lap)
 * leaderboard style
@@ -10,5 +9,3 @@
 * profile pages
 * loading of images async
 
-* dont allow usernames with the same character but different casing
-  * e.g Pohka !== pohka, dont allow this

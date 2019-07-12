@@ -49,8 +49,21 @@ class Events
   static signOut()
   {
     console.log("signed out");
+    const token = Cookies.load("login-token");
+    if(token !== undefined)
+    {
+      //notify database of user logged out
+      const url = Query.create("/logout", {token : token});
+      console.log("url:", url);
+      Query.fetch(url, (result)=>{
+        console.log("result:", result);
+      });
+    }
+
+    //remove cookies
     Cookies.remove("login-token");
-    //todo: notify server that this user has logged out, then remove the token from database
+    Cookies.remove("avatar");
+    Cookies.remove("username");
   }
 
   static onRouteChange()

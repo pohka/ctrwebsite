@@ -36,6 +36,27 @@ class Query
     }
     return true;
   }
+
+  //fetch the restful api
+  static fetch(url, callback){
+    fetch(url, { })
+      .then(function(res){
+        if (res.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +
+            res.status);
+          return;
+        }
+        else
+        {
+          return res.json();
+        }
+      }).then((result)=>{
+        if(callback !== undefined)
+        {
+          callback(result);
+        }
+      });
+  }
 }
 
 Query.host = "localhost:3001";

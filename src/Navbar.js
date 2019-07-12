@@ -71,7 +71,15 @@ class Navbar extends Component {
   {
     if(this.isSignedIn === true)
     {
-      return(<div className="btn nav-item nav-login">{this.username}</div>);
+      return(
+        <div className="btn nav-login">
+          {this.username}
+          <div className="profile-menu">
+            <a href="#" className="profile-menu-item">Profile</a>
+            <div className="profile-menu-item" onClick={Events.signOut}>Log Out</div>
+          </div>
+        </div>
+      );
     }
     else
     {
@@ -97,7 +105,6 @@ class Navbar extends Component {
 
     return (
       <div className="Navbar">
-        
         <div className="nav-container">
           <a className="btn nav-logo" href="/" onClick={Router.handleClick} route="root">CTR WORLD</a>
           {itemDOMs}

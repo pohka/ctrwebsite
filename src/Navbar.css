@@ -48,7 +48,7 @@
 .nav-item
 {
   flex: 1;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .nav-item.active
@@ -65,4 +65,24 @@
   letter-spacing: 1.4px;
   cursor: pointer;
   color: var(--text_menu);
+  width: 200px;
+}
+
+
+.profile-menu
+{
+  position: absolute;
+}
+
+.profile-menu-item
+{
+  display:block;
+  width: 200px;
+  cursor: pointer;
+  background: var(--menu_background);
+}
+
+.profile-menu a:hover, .profile-menu-item:hover
+{
+  background: var(--menu_item_hover);
 }
