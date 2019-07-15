@@ -259,13 +259,14 @@ module.exports = class AddUser
 
       let lowercaseName = params.username.toLowerCase();
       const userQuery = 
-        "INSERT INTO players (name, country_code, dob, email, lowercase_name) " +
+        "INSERT INTO players (name, country_code, dob, email, lowercase_name, avatar) " +
         "VALUES ("+
           "'" + params.username + "', " +
           "'" + params.country + "', " +
           params.dob + ", " +
           "'" + params.email + "', " +
-          "'" + lowercaseName + "')";
+          "'" + lowercaseName +  "', " +
+          "'" + params.avatar + "')";
     
       
       db.run(userQuery, [], (err) => {

@@ -17,6 +17,7 @@ import LoginModal from './LoginModal';
 import * as serviceWorker from './serviceWorker';
 import Router from './Router';
 import Events from './Events';
+import Cookies from "react-cookies";
 
 
 
@@ -106,7 +107,10 @@ Router.onPathChange = Events.onRouteChange;
 
 ReactDOM.render(<LoginModal isHidden="true" />, document.getElementById("modal-container"));
 
-ReactDOM.render(<Navbar />, document.getElementById('nav'));
+
+const token = Cookies.load("login-token");
+const isLoggedIn = (token !== undefined);
+ReactDOM.render(<Navbar isLoggedIn={isLoggedIn} />, document.getElementById('nav'));
 
 
 //ReactDOM.render(<Leaderboard entrys={ENTRYS} />, document.getElementById('body'));

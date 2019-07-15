@@ -13,6 +13,19 @@ class Events
     ReactDOM.render(<LoginModal isHidden={isHidden}/>, document.getElementById("modal-container"));
   }
 
+  static loginStatusChanged()
+  {
+    const token = Cookies.load("login-token");
+    const isLoggedIn = (token !== undefined);
+    ReactDOM.render(<Navbar isLoggedIn={isLoggedIn} />, document.getElementById('nav'));
+  }
+
+  static isLoggedInCheck()
+  {
+    const token = Cookies.load("login-token");
+    return (token !== undefined);
+  }
+
   static googleResponse(response)
   {
     if(response.error === undefined)
@@ -64,6 +77,8 @@ class Events
     Cookies.remove("login-token");
     Cookies.remove("avatar");
     Cookies.remove("username");
+
+    Events.loginStatusChanged();
   }
 
   static onRouteChange()

@@ -9,9 +9,7 @@ class Navbar extends Component {
   {
     super(props);
 
-    const token = Cookies.load("login-token");
-    const isSignedIn = (token !== undefined);
-    if(isSignedIn)
+    if(this.props.isLoggedIn)
     {
       let username = Cookies.load("username");
       if(username === undefined)
@@ -28,12 +26,12 @@ class Navbar extends Component {
       this.username = username;
       this.avatar = avatar;
     }
-    console.log("username:", );
+
+    console.log("isloggedin:", this.props.isLoggedIn);
+
+    console.log("username:", Cookies.load("username"));
     console.log("avatar:", Cookies.load("avatar"));
-    this.isSignedIn = isSignedIn;
-
-
-    this.setState({ signedIn : isSignedIn });
+    
   }
 
   genItem(cls, routeID, text)
@@ -69,7 +67,7 @@ class Navbar extends Component {
 
   accountNavItem()
   {
-    if(this.isSignedIn === true)
+    if(Events.isLoggedInCheck())
     {
       return(
         <div className="btn nav-login">

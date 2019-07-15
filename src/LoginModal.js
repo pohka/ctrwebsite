@@ -462,6 +462,84 @@ class LoginModal extends Component {
     );
   }
 
+  static googleLogin(response)
+  {
+
+    console.log("google response");
+    if(response.error === undefined)
+    {
+      var profile = response.getBasicProfile();
+      var tokenID = response.getAuthResponse().id_token;
+      const email = profile.U3;
+
+      const url = Query.create("/login", { 
+        token : tokenID, 
+        email : email
+      });
+
+      console.log("url:", url);
+      
+      fetch(url, { })
+      .then(function(res){
+        if (res.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +
+            res.status);
+          return;
+        }
+        else
+        {
+          return res.json();
+        }
+      }).then(function(res){
+        if(res.error)
+        {
+          console.log(res);
+        }
+        else
+        {
+          console.log("res", res);
+          const MS_IN_DAY = 86400000;
+          let expireDate = new Date(Date.now() + (14*MS_IN_DAY));
+          Cookies.save(
+            "login-token", 
+            tokenID,
+            {
+              path: '/',
+              expires : expireDate
+            }
+          );
+
+          Cookies.save(
+            "avatar",
+            res.avatar,
+            tokenID,
+            {
+              path: '/',
+              expires : expireDate
+            }
+          );
+
+          Cookies.save(
+            "username",
+            res.username,
+            tokenID,
+            {
+              path: '/',
+              expires : expireDate
+            }
+          );
+
+          Events.setLoginIsHidden(true);
+          Events.loginStatusChanged();
+        }
+      });
+    }
+    else
+    {
+      console.log("login error", response);
+    }
+  }
+
   render() {
     let content = [];
 
@@ -471,8 +549,8 @@ class LoginModal extends Component {
         <GoogleLogin
           clientId="720355153565-m69ku08l8ec3lbs2p2al88jndqfvdbtp.apps.googleusercontent.com"
           buttonText="Login"
-          onSuccess={Events.googleResponse}
-          onFailure={Events.googleResponse}
+          onSuccess={LoginModal.googleLogin}
+          onFailure={LoginModal.googleLogin}
           cookiePolicy={'single_host_origin'}
         />
         

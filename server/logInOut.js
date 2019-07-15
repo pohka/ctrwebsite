@@ -39,5 +39,61 @@ module.exports = class LogInOut
         res.end(JSON.stringify(response));
       }
     });
+
+
+    app.get("/login", function(req, res){
+      let params = URL.getParams(req.originalUrl);
+      let response = {};
+
+      if(
+        params.email !== undefined && typeof params.email == "string" &&
+        params.token !== undefined && typeof params.token == "string"
+        )
+      {
+        //create new login token
+        //duplicating code here
+        var db = new sqlite3.Database('ctr.db');
+        const query = "SELECT * FROM players WHERE email='" + params.email + "'";
+  
+        db.all(query, [], (err, rows) =>{
+          if(err)
+          {
+            db.close();
+          }
+          if(rows.length > 0)
+          {
+            const MS_IN_DAY = 86400000;
+            const playerID = rows[0].id;
+            const username = rows[0].name;
+            const avatar = rows[0].avatar;
+            let expireDate = new Date(Date.now() + (14 * MS_IN_DAY));
+  
+            const tokenQuery = "INSERT INTO tokens (token, player_id, expires) " +
+              "VALUES ('" + params.token + "', " + playerID + ", " + expireDate.getTime() +")";
+  
+            db.run(tokenQuery, [], (err) => {
+              if(err)
+              {
+                
+              }
+              else
+              {
+                response.username = username;
+                response.avatar = avatar;
+                res.end(JSON.stringify(response));
+              }
+              db.close();
+            });
+          }
+        });
+      }
+      else
+      {
+        response.error = "Invalid parameter(s)";
+        res.end(JSON.stringify(response));
+      }
+
+      
+    });
   }
 }
