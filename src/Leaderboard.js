@@ -81,11 +81,19 @@ class Leaderboard extends Component {
       }
     }).then(function(res){
       console.log("request result:", res.data);
+
+      let currentRank = 1;
       for(let i=0; i<res.data.length; i++)
       {
         res.data[i].IGTimeString = Leaderboard.convertToIGTString(res.data[i].time);
         res.data[i].dateString = Leaderboard.genDateString(res.data[i].date);
-        res.data[i].rank = i+1;
+
+        //rank will be the same for ties
+        if(i === 0 || res.data[i].time !== res.data[i-1].time)
+        {
+          currentRank = i+1;
+        }
+        res.data[i].rank = currentRank;
       }
 
       Leaderboard.current.entrys = res.data;
