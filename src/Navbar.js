@@ -27,6 +27,10 @@ class Navbar extends Component {
       this.avatar = avatar;
     }
 
+    this.state = { 
+      profileMenuHidden : true
+    };
+
     console.log("isloggedin:", this.props.isLoggedIn);
 
     console.log("username:", Cookies.load("username"));
@@ -65,16 +69,38 @@ class Navbar extends Component {
     Events.setLoginIsHidden(false);
   }
 
+  //tohgle profile menu visiblity 
+  toggleProfileMenuClick(e, comp)
+  {
+    comp.setState({ profileMenuHidden : !comp.state.profileMenuHidden });
+  }
+
   accountNavItem()
   {
     if(Events.isLoggedInCheck())
     {
-      return(
-        <div className="btn nav-login">
-          {this.username}
-          <div className="profile-menu">
+      const username = Cookies.load("username");
+
+      //profile menu 
+      var profileMenuItems = [];
+      if(this.state.profileMenuHidden === false)
+      {
+        profileMenuItems.push(
             <a href="#" className="profile-menu-item">Profile</a>
-            <div className="profile-menu-item" onClick={Events.signOut}>Log Out</div>
+        );
+
+        profileMenuItems.push(
+          <div className="profile-menu-item" onClick={Events.signOut}>Log Out</div>
+        );
+      }
+
+
+    
+      return(
+        <div className="btn nav-login" onClick={(e)=>{ this.toggleProfileMenuClick(e, this); }}>
+          {username}
+          <div className="profile-menu">
+            {profileMenuItems}
           </div>
         </div>
       );
