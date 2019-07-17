@@ -5,6 +5,8 @@ import Events from './Events';
 import Store from "./Store";
 import Cookies from 'react-cookies'
 import Query from "./Query";
+import Countrys from "./Countrys"; 
+import Drivers from "./Drivers";
 
 class LoginModal extends Component {
   constructor(props)
@@ -323,14 +325,19 @@ class LoginModal extends Component {
      doms.push(<div className="invalid-field">* {this.errors.country}</div>);
     }
 
+    let options = [];
+    for(let i=0; i<Countrys.length; i++)
+    {
+      options.push(<option value={Countrys[i].code}>{Countrys[i].name}</option>);
+    }
+
     doms.push(
     <select 
       value={Store.register.country}
       onChange={(e)=>{this.onInputChange(e, "country", this)}}
       >
       <option disabled>-</option>
-      <option value="fr">France</option>
-      <option value="ie">Ireland</option>
+      {options}
     </select>
     );
 
@@ -392,28 +399,19 @@ class LoginModal extends Component {
       doms.push(<div className="invalid-field">* {this.errors.avatar}</div>);
     }
 
+    let options = [];
+    for(let i=0; i<Drivers.length; i++)
+    {
+      options.push(<option value={Drivers[i].key}>{Drivers[i].name}</option>);
+    }
+
     doms.push(
       <select 
           value={Store.register.avatar}
           onChange={(e)=>{this.onInputChange(e, "avatar", this)}}
         >
           <option disabled>-</option>
-          <option value="crash">Crash</option>
-          <option value="dingodile">Dingodile</option>
-          <option value="coco">Coco</option>
-          <option value="penta_penguin">Penta Penguin</option>
-          <option value="ngin">N.Gin</option>
-          <option value="cortex">Cortex</option>
-          <option value="tiny">Tiny</option>
-          <option value="polar">Polar</option>
-          <option value="pura">Pura</option>
-          <option value="ripper_roo">Ripper Roo</option>
-          <option value="papu_papu">Papu Papu</option>
-          <option value="komodo_joe">Komodo Joe</option>
-          <option value="pinstripe">Pinstripe</option>
-          <option value="fake_crash">Fake Crash</option>
-          <option value="ntropy">N.Tropy</option>
-          <option value="nitros_oxide">Nitros Oxide</option>
+          {options}
         </select>
     );
 

@@ -11,7 +11,7 @@ import Archive from "./Archive";
 import Guide from "./Guide";
 import Speedrun from "./Speedrun"
 import LoginModal from './LoginModal';
-
+import Home from "./home";
 
 
 import * as serviceWorker from './serviceWorker';
@@ -29,7 +29,7 @@ Router.routes.push({
   dir : "/",
   action : function(){
 
-    ReactDOM.render(<Tracks/>, document.getElementById('body'));
+    ReactDOM.render(<Home/>, document.getElementById('body'));
   }
 });
 
