@@ -7,17 +7,17 @@
 :root
 {
   --text: rgb(255, 255, 255);
-  --background: rgb(75, 75, 75);
+  --background: rgb(65, 65, 65);
   --menu_background: rgb(43, 43, 43);
   --menu_item_hover: rgb(94, 94, 94);
   --border: rgb(139, 139, 139);
   --text_menu : rgb(248, 248, 248);
   --primary : rgb(245, 78, 1);
   --logo: rgb(255, 94, 0);
-  --box_bg: #444;
-  --shadow: rgb(26, 26, 26);
+  --box_bg: rgb(31, 31, 31);
+  --shadow: rgb(27, 27, 27);
   --error: rgb(255, 94, 94);
-  --row : #5e5e5e;
+  --row : rgb(80, 80, 80);
   --row_hover: #858585;
   --alt_row : rgb(231, 231, 231);
   --font-content: "Open Sans",sans-serif;

@@ -110,7 +110,15 @@ ReactDOM.render(<LoginModal isHidden="true" />, document.getElementById("modal-c
 
 const token = Cookies.load("login-token");
 const isLoggedIn = (token !== undefined);
-ReactDOM.render(<Navbar isLoggedIn={isLoggedIn} />, document.getElementById('nav'));
+var NAVBAR_COMP = ReactDOM.render(<Navbar isLoggedIn={isLoggedIn} />, document.getElementById('nav'));
+
+document.addEventListener("click", function(e){
+  let id = e.target.id;
+  if(id !== undefined && id !== "profile-menu")
+  {
+    NAVBAR_COMP.setIsProfileMenuHidden(true);
+  }
+});
 
 
 //ReactDOM.render(<Leaderboard entrys={ENTRYS} />, document.getElementById('body'));

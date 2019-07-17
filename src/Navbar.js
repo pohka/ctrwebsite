@@ -27,8 +27,15 @@ class Navbar extends Component {
       this.avatar = avatar;
     }
 
+    let isProfileMenuHidden = true;
+    if(this.props.isProfileMenuHidden !== undefined)
+    {
+      isProfileMenuHidden = this.props.isProfileMenuHidden;
+    }
+    
+    console.log("am i herd????")
     this.state = { 
-      profileMenuHidden : true
+      profileMenuHidden : isProfileMenuHidden
     };
 
     console.log("isloggedin:", this.props.isLoggedIn);
@@ -36,6 +43,14 @@ class Navbar extends Component {
     console.log("username:", Cookies.load("username"));
     console.log("avatar:", Cookies.load("avatar"));
     
+  }
+
+  setIsProfileMenuHidden(isHidden)
+  {
+    console.log("test");
+    this.setState({
+      profileMenuHidden : isHidden
+    });
   }
 
   genItem(cls, routeID, text)
@@ -79,26 +94,38 @@ class Navbar extends Component {
   {
     if(Events.isLoggedInCheck())
     {
-      const username = Cookies.load("username");
+      var username = Cookies.load("username");
+      if(username === undefined)
+      {
+        username = "Account";
+      }
+
+      var avatar = Cookies.load("avatar");
+      if(avatar === undefined)
+      {
+        avatar = "crash";
+      }
+
+      let avatarURL = "/img/avatars/" + avatar;
 
       //profile menu 
       var profileMenuItems = [];
       if(this.state.profileMenuHidden === false)
       {
         profileMenuItems.push(
-            <a href="#" className="profile-menu-item">Profile</a>
+            <a href="#" className="profile-menu-item">PROFILE</a>
         );
 
         profileMenuItems.push(
-          <div className="profile-menu-item" onClick={Events.signOut}>Log Out</div>
+          <div className="profile-menu-item" onClick={Events.signOut}>LOG OUT</div>
         );
       }
 
 
     
       return(
-        <div className="btn nav-login" onClick={(e)=>{ this.toggleProfileMenuClick(e, this); }}>
-          {username}
+        <div className="btn nav-login" id="profile-menu" onClick={(e)=>{ this.toggleProfileMenuClick(e, this); }}>
+          {username.toUpperCase()}
           <div className="profile-menu">
             {profileMenuItems}
           </div>

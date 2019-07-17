@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /public/img/flags
-*.db
+/server/ctr.db

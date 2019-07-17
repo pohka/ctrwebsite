@@ -229,6 +229,7 @@ class LoginModal extends Component {
         }
         else if(res.success !== undefined && res.success === true)
         {
+          
           //add cookies
           const MS_IN_DAY = 86400000;
           let expireDate = new Date(Date.now() + (14*MS_IN_DAY));
@@ -426,7 +427,7 @@ class LoginModal extends Component {
             <GoogleLogin
           className="google-btn"
           clientId="720355153565-m69ku08l8ec3lbs2p2al88jndqfvdbtp.apps.googleusercontent.com"
-          buttonText="Login with Google"
+          buttonText="Link Google Account"
           onSuccess={Events.googleResponse}
           onFailure={Events.googleResponse}
           cookiePolicy={'single_host_origin'}
@@ -545,18 +546,19 @@ class LoginModal extends Component {
 
     if(this.state.option === "login")
     {
-      content.push(<div key="google-btns">
-        <GoogleLogin
-          clientId="720355153565-m69ku08l8ec3lbs2p2al88jndqfvdbtp.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={LoginModal.googleLogin}
-          onFailure={LoginModal.googleLogin}
-          cookiePolicy={'single_host_origin'}
-        />
-        
-       
-        <a href="#" onClick={Events.signOut}>Sign out</a>
-      </div>);
+      content.push(
+        <div className="login-con">
+          <div className="google-btn google-btn-login" key="google-btns">
+            <GoogleLogin
+              clientId="720355153565-m69ku08l8ec3lbs2p2al88jndqfvdbtp.apps.googleusercontent.com"
+              buttonText="Login with Google"
+              onSuccess={LoginModal.googleLogin}
+              onFailure={LoginModal.googleLogin}
+              cookiePolicy={'single_host_origin'}
+            />
+          </div>
+        </div>
+      );
     }
     else
     {

@@ -25,6 +25,7 @@
 {
   margin: 10px 30px;
   display: inline-block;
+  
 }
 
 .video-media
@@ -61,4 +62,5 @@
   font-family: var(--font-content);
   font-size: 14px;
   letter-spacing: 0px;
+  line-height: 20px;
 }

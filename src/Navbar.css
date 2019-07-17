@@ -66,6 +66,7 @@
   cursor: pointer;
   color: var(--text_menu);
   width: 200px;
+  font-size: 14px;
 }
 
 
